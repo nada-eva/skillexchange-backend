@@ -1,13 +1,13 @@
-const express    = require('express');
-const cors       = require('cors');
-const dotenv     = require('dotenv');
-const connectDB  = require('./config/db');
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
 dotenv.config();
 connectDB();
 const app = express();
 
-// midllware qui autorise les requêtes venant du frontend React (port 5173)
+// middleware autorise req venant du front
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true,
 }));
@@ -23,6 +23,18 @@ app.get('/', (req, res) => {
     status:  'OK',
   });
 });
+
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
+// Sprint 3 :
+// app.use('/api/annonces',     require('./routes/annonceRoutes'));
+// Sprint 4 :
+// app.use('/api/messages',     require('./routes/messageRoutes'));
+// app.use('/api/reservations', require('./routes/reservationRoutes'));
+// Sprint 5 :
+// app.use('/api/evaluations',  require('./routes/evaluationRoutes'));
+// app.use('/api/signalements', require('./routes/signalementRoutes'));
+// app.use('/api/admin',        require('./routes/adminRoutes'));
 
 app.use((req, res) => {
   res.status(404).json({ message: `Route ${req.originalUrl} introuvable` });
