@@ -27,9 +27,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/annonces', require('./routes/annonceRoutes'));
-// Sprint 4 :
-// app.use('/api/messages',     require('./routes/messageRoutes'));
-// app.use('/api/reservations', require('./routes/reservationRoutes'));
+app.use('/api/messages', require('./routes/messageRoutes'));
+app.use('/api/reservations', require('./routes/reservationRoutes'));
 // Sprint 5 :
 // app.use('/api/evaluations',  require('./routes/evaluationRoutes'));
 // app.use('/api/signalements', require('./routes/signalementRoutes'));
